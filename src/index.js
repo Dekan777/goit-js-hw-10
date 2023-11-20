@@ -4,12 +4,15 @@ axios.defaults.headers.common['x-api-key'] =
 const BASE_URL = `https://api.thecatapi.com/v1/breeds`;
 
 
+function getTreiding() {
+  axios
+    .get(BASE_URL)
+    .then(response => {
+      console.log('Cat breeds:', response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching cat breeds:', error);
+    });
+}
 
-axios
-  .get(BASE_URL)
-  .then(response => {
-    console.log('Cat breeds:', response.data);
-  })
-  .catch(error => {
-    console.error('Error fetching cat breeds:', error);
-  });
+getTreiding();
