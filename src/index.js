@@ -1,44 +1,35 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 import SlimSelect from 'slim-select';
-// import { fetchCatByBreed } from './cat-api.js';
+
 
 const catInfoContainer = document.querySelector('.cat-info');
 const loaderElement = document.querySelector('.loader');
-const errorContainer = document.querySelector('.error');
 
 function populateBreedsSelect(breeds) {
-    
   // Очищаем существующие опции, если они есть
   selectElement.innerHTML = '';
 
   // Используем метод map для создания массива опций
   const breedOptions = breeds.map(breed => {
-
     const option = document.createElement('option');
-    option.value = breed.id; // Идентификатор породы в качестве значения
-    option.text = breed.name; // Название породы в качестве текста
+    option.value = breed.id;
+    option.text = breed.name;
     // console.log(option.value);
-    
     return option;
-    
   });
 
   // Добавляем все опции в select одним блоком
   selectElement.append(...breedOptions);
-  //   console.log(breedOptions);
 }
 
 fetchBreeds()
   .then(breeds => {
     populateBreedsSelect(breeds);
-    const slimSelect = new SlimSelect({
-        select: '#selectElement',
-        settings: {
-            
 
-          }
-      });
-    // console.log('Cat breeds:', breeds);
+    const slimSelect = new SlimSelect({
+      select: '#selectElement',
+      settings: {},
+    });
   })
   .catch(error => {
     console.error('Error fetching cat breeds:', error);
@@ -53,25 +44,21 @@ selectElement.addEventListener('change', async event => {
   fetchCatByBreed(selectedBreedId)
     .then(catInfo => {
       console.log('Cat information:', catInfo);
-      // Здесь вы можете использовать информацию о коте по вашему усмотрению
     })
-    .catch(error => {
-    });
+    .catch(error => {});
 });
 
 selectElement.addEventListener('change', async event => {
   const selectedBreedId = event.target.value;
   fetchCatByBreed(selectedBreedId)
     .then(catInfo => {
-      // Очищаем существующую информацию о коте
       catInfoContainer.innerHTML = '';
-
       // Создаем изображение и блок с информацией о коте
       const catImage = document.createElement('img');
       catImage.src = catInfo.url;
       catImage.alt = 'Cat Image';
-      catImage.style.width = '300px'; // Устанавливаем ширину изображения
-      catImage.style.height = 'auto'; // Сохраняем пропорции
+      catImage.style.width = '300px';
+      catImage.style.height = 'auto';
       catInfoContainer.appendChild(catImage);
 
       const catInfoDetails = document.createElement('div');
