@@ -15,17 +15,20 @@ function populateBreedsSelect(breeds) {
     const option = document.createElement('option');
     option.value = breed.id; // Идентификатор породы в качестве значения
     option.text = breed.name; // Название породы в качестве текста
+    // console.log(option.value);
     return option;
+    
   });
 
   // Добавляем все опции в select одним блоком
   selectElement.append(...breedOptions);
+//   console.log(breedOptions);
 }
 
 fetchBreeds()
   .then(breeds => {
     populateBreedsSelect(breeds);
-    console.log('Cat breeds:', breeds);
+    // console.log('Cat breeds:', breeds);
   })
   .catch(error => {
     console.error('Error fetching cat breeds:', error);
