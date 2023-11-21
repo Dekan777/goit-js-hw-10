@@ -69,5 +69,7 @@ selectElement.addEventListener('change', async event => {
     })
     .catch(error => {
       console.error('Error fetching cat information:', error);
+      document.querySelector('.error').style.display = 'none';
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
     });
 });

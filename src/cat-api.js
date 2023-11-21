@@ -43,7 +43,7 @@ export function fetchCatByBreed(breedId) {
     .catch(error => {
       console.error('Error fetching cat information:', error);
       Notify.failure('Oops! Something went wrong! Try reloading the page!');
-      document.querySelector('.error').style.display = 'flex';
+      document.querySelector('.error').style.display = 'none';
       throw error;
     });
 }
