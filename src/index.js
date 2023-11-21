@@ -1,4 +1,5 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
+import SlimSelect from 'slim-select';
 // import { fetchCatByBreed } from './cat-api.js';
 
 const catInfoContainer = document.querySelector('.cat-info');
@@ -6,16 +7,20 @@ const loaderElement = document.querySelector('.loader');
 const errorContainer = document.querySelector('.error');
 
 function populateBreedsSelect(breeds) {
+    
   // Очищаем существующие опции, если они есть
   selectElement.innerHTML = '';
 
   // Используем метод map для создания массива опций
   const breedOptions = breeds.map(breed => {
+
     const option = document.createElement('option');
     option.value = breed.id; // Идентификатор породы в качестве значения
     option.text = breed.name; // Название породы в качестве текста
     // console.log(option.value);
+    
     return option;
+    
   });
 
   // Добавляем все опции в select одним блоком
@@ -26,6 +31,13 @@ function populateBreedsSelect(breeds) {
 fetchBreeds()
   .then(breeds => {
     populateBreedsSelect(breeds);
+    const slimSelect = new SlimSelect({
+        select: '#selectElement',
+        settings: {
+            
+
+          }
+      });
     // console.log('Cat breeds:', breeds);
   })
   .catch(error => {

@@ -9,20 +9,22 @@ const BASE_URL_INFO = `https://api.thecatapi.com/v1/images/search`;
 
 export function fetchBreeds() {
   // Показуємо загрузчик
-  document.querySelector('.loader').style.display = 'block';
+  document.querySelector('.loader').style.display = 'flex';
   document.querySelector('.breed-select').style.display = 'none';
   document.querySelector('.error').style.display = 'none';
+  document.querySelector('.cat-info').style.display = 'none';
   return axios
     .get(BASE_URL)
     .then(response => response.data)
     .finally(() => {
       document.querySelector('.loader').style.display = 'none';
       // Show the breed select
-      document.querySelector('.breed-select').style.display = 'block';
+      document.querySelector('.breed-select').style.display = 'flex';
+      
     })
     .catch(error => {
       console.error('Error fetching cat breeds:', error);
-      document.querySelector('.error').style.display = 'block';
+      document.querySelector('.error').style.display = 'flex';
 
       throw error;
     });
@@ -31,9 +33,10 @@ export function fetchBreeds() {
 export function fetchCatByBreed(breedId) {
   const catInfoURL = `${BASE_URL_INFO}?breed_ids=${breedId}`;
 
-  document.querySelector('.loader').style.display = 'block';
+  document.querySelector('.loader').style.display = 'flex';
   // Hide the cat info
   document.querySelector('.cat-info').style.display = 'none';
+
   document.querySelector('.error').style.display = 'none';
 
   return axios
@@ -43,11 +46,11 @@ export function fetchCatByBreed(breedId) {
       // Hide the loader
       document.querySelector('.loader').style.display = 'none';
       // Show the cat info
-      document.querySelector('.cat-info').style.display = 'block';
+      document.querySelector('.cat-info').style.display = 'flex';
     })
     .catch(error => {
       console.error('Error fetching cat information:', error);
-      document.querySelector('.error').style.display = 'block';
+      document.querySelector('.error').style.display = 'flex';
       throw error;
     });
 }
