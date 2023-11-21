@@ -1,7 +1,10 @@
-import { fetchBreeds } from './cat-api.js';
-import { fetchCatByBreed } from './cat-api.js';
+import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
+// import { fetchCatByBreed } from './cat-api.js';
+
 
 const catInfoContainer = document.querySelector('.cat-info');
+const loaderElement = document.querySelector('.loader');
+const errorContainer = document.querySelector('.error');
 
 function populateBreedsSelect(breeds) {
   // Очищаем существующие опции, если они есть
@@ -33,7 +36,10 @@ fetchBreeds()
 const selectElement = document.querySelector('.breed-select');
 
 selectElement.addEventListener('change', async event => {
+  
   const selectedBreedId = event.target.value;
+  loaderElement.classList.add('loading');
+ 
   fetchCatByBreed(selectedBreedId)
     .then(catInfo => {
       console.log('Cat information:', catInfo);
