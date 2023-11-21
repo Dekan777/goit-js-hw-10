@@ -10,15 +10,16 @@ function populateBreedsSelect(breeds) {
   // Очищаем существующие опции, если они есть
   selectElement.innerHTML = '';
 
-  // Проходим по массиву пород и создаем option для каждой породы
-  breeds.forEach(breed => {
+  // Используем метод map для создания массива опций
+  const breedOptions = breeds.map(breed => {
     const option = document.createElement('option');
     option.value = breed.id; // Идентификатор породы в качестве значения
     option.text = breed.name; // Название породы в качестве текста
-
-    // Добавляем созданную опцию в select
-    selectElement.appendChild(option);
+    return option;
   });
+
+  // Добавляем все опции в select одним блоком
+  selectElement.append(...breedOptions);
 }
 
 fetchBreeds()
