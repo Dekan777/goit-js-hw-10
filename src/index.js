@@ -1,7 +1,6 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 // import { fetchCatByBreed } from './cat-api.js';
 
-
 const catInfoContainer = document.querySelector('.cat-info');
 const loaderElement = document.querySelector('.loader');
 const errorContainer = document.querySelector('.error');
@@ -36,17 +35,15 @@ fetchBreeds()
 const selectElement = document.querySelector('.breed-select');
 
 selectElement.addEventListener('change', async event => {
-  
   const selectedBreedId = event.target.value;
   loaderElement.classList.add('loading');
- 
+
   fetchCatByBreed(selectedBreedId)
     .then(catInfo => {
       console.log('Cat information:', catInfo);
       // Здесь вы можете использовать информацию о коте по вашему усмотрению
     })
     .catch(error => {
-      // Обработка ошибок, если необходимо
     });
 });
 
